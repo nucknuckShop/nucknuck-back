@@ -2,14 +2,19 @@ package com.shop.nucknuckshop.user.infrastructrue;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.nucknuckshop.user.controller.request.UserSearch;
+import com.shop.nucknuckshop.user.domain.Email;
 import com.shop.nucknuckshop.user.domain.User;
 import com.shop.nucknuckshop.user.domain.UserRepository;
-import java.util.Collections;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
@@ -21,18 +26,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findById(Long id){
-        return userJpaRepository.findById(id).orElse(null);
+    public Optional<User> findByEmail(Email email){
+        return userJpaRepository.findById(email);
     }
 
-    @Override
-    public boolean existById(Long id){
-        return userJpaRepository.existsById(id);
+    public void save(User user){
+        userJpaRepository.save(user);
     }
-
-    @Override
-    public boolean existByEmail(String email) {
-        return userJpaRepository.existsByEmail(email);
-    }
-
 }
