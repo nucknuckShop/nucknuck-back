@@ -14,9 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-
     @EmbeddedId
     private Email email;
 
@@ -30,8 +27,8 @@ public class User {
     }
 
     public void changePassword(String currentPassword, String newPassword){
-        if(this.password.match(currentPassword)){
-            throw new BadPasswordException("not current password");
+        if(!this.password.match(currentPassword) || this.password.match(newPassword)){
+            throw new BadPasswordException();
         }
         this.password = new Password(newPassword);
     }

@@ -1,6 +1,7 @@
 package com.shop.nucknuckshop.user.controller.request;
 
 import com.shop.nucknuckshop.annotation.Punctuation;
+import com.shop.nucknuckshop.user.controller.response.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,9 @@ public class UserSignInRequest {
     public UserSignInRequest(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserResponse convertToResponse(){
+        return new UserResponse(email, password);
     }
 }

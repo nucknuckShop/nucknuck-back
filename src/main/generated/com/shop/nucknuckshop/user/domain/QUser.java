@@ -24,8 +24,6 @@ public class QUser extends EntityPathBase<User> {
 
     public final QEmail email;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
-
     public final QPassword password;
 
     public QUser(String variable) {

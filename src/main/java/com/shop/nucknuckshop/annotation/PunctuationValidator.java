@@ -25,7 +25,7 @@ public class PunctuationValidator implements ConstraintValidator<Punctuation, St
     public boolean isValid(String str, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
         context.buildConstraintViolationWithTemplate(requiredCount + message)
-                .addConstraintViolation();
+               .addConstraintViolation();
 
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(str);

@@ -1,12 +1,9 @@
 package com.shop.nucknuckshop.user.controller.request;
 
 import com.shop.nucknuckshop.annotation.Punctuation;
-import com.shop.nucknuckshop.user.controller.response.UserResponse;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -14,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor
-public class UserSignUpRequest {
+public class UserPasswordChangeRequest {
 
     @NotNull
     @Email
@@ -23,18 +20,17 @@ public class UserSignUpRequest {
     @NotNull
     @Size(max = 20, min = 6)
     @Punctuation(requireCount = 2)
-    private String password;
+    private String currentPassword;
 
-    @Nullable
-    private String name;
+    @NotNull
+    @Size(max = 20, min = 6)
+    @Punctuation(requireCount = 2)
+    private String newPassword;
 
     @Builder
-    public UserSignUpRequest(String email, String password) {
+    public UserPasswordChangeRequest(String email, String currentPassword, String newPassword) {
         this.email = email;
-        this.password = password;
-    }
-
-    public UserResponse convertToResponse(){
-        return new UserResponse(email, password);
+        this.currentPassword = currentPassword;
+        this.newPassword = newPassword;
     }
 }

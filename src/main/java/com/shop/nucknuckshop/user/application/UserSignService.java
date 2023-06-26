@@ -28,7 +28,7 @@ public class UserSignService {
     public void signIn(String email, String password){
         User user = userRepository.findByEmail(new Email(email)).orElseThrow(NoSuchUserException::new);
         if(!user.getPassword().match(password)){
-            throw new BadPasswordException("Wrong password");
+            throw new BadPasswordException();
         }
     }
 }

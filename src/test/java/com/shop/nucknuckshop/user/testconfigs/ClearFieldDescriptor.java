@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.config;
+package com.shop.nucknuckshop.user.testconfigs;
 
 import org.springframework.restdocs.payload.FieldDescriptor;
 

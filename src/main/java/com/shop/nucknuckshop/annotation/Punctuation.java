@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = PunctuationValidator.class)
 public @interface Punctuation {
     int requireCount() default 1;
-    String message() default  "개 이상의 특수 문자가 필요합니다";
+    String message() default "개 이상의 특수 문자가 필요합니다";
     Class[] groups() default {};
     Class[] payload() default {};
 }
