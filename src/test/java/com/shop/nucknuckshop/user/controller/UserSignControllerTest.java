@@ -88,7 +88,7 @@ class UserSignControllerTest {
                         requestFields(
                             parameter("email").description("user email"),
                             parameter("password").description("user password").attributes(key("constraint").value("특수문자 2개 포함")),
-                            parameter("name").description("user name").optional()
+                            parameter("name").type("String").description("user name").optional()
                         )
                 ));
 
@@ -154,7 +154,11 @@ class UserSignControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(resultHandler.document(
+                        requestFields(
+                                parameter("email").description("user email"),
+                                parameter("password").description("user password").attributes(key("constraint").value("특수문자 2개 포함"))
+                        )));
     }
 
     @Test

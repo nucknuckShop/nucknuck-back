@@ -6,4 +6,6 @@
 :toclevels: 2
 :sectlinks:
 
-include::User-API.adoc[]
+include::User-Sign-API.adoc[]
+
+include::User-Password-API.adoc[]
