@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.email;
+package com.shop.nucknuckshop.util.email;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

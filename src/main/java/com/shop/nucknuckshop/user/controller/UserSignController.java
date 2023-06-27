@@ -31,7 +31,7 @@ public class UserSignController {
         return ResponseEntity.ok(request.convertToResponse());
     }
 
-    @DeleteMapping("/delete")
+    @PutMapping("/inactive")
     public ResponseEntity<UserResponse> inactive(@RequestBody @Valid UserSignInRequest request){
         userSignService.inactive(request.getEmail(), request.getPassword());
         return ResponseEntity.ok(request.convertToResponse());

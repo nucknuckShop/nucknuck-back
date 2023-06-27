@@ -29,12 +29,16 @@ public class QUser extends EntityPathBase<User> {
 
     public final QEmail email;
 
+    public final DatePath<java.time.LocalDate> inactiveDate = createDate("inactiveDate", java.time.LocalDate.class);
+
     public final NumberPath<Long> lastLoginTimestamp = createNumber("lastLoginTimestamp", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedDateTime = _super.modifiedDateTime;
 
     public final QPassword password;
+
+    public final EnumPath<UserStatus> userStatus = createEnum("userStatus", UserStatus.class);
 
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);

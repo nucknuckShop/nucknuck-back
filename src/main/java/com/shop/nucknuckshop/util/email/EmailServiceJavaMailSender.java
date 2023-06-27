@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.email;
+package com.shop.nucknuckshop.util.email;
 
 import com.shop.nucknuckshop.user.domain.Email;
 import lombok.RequiredArgsConstructor;

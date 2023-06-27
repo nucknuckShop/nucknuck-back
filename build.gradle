@@ -7,7 +7,6 @@ plugins {
 
 group = 'com.shop'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -31,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation "com.querydsl:querydsl-core"
     implementation "com.querydsl:querydsl-jpa"
@@ -51,6 +51,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
 }
 
 tasks.named('test') {

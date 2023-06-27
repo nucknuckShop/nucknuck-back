@@ -5,6 +5,9 @@ import com.shop.nucknuckshop.util.clock.ClockHolder;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "NNS_USER")
@@ -19,11 +22,12 @@ public class User extends BaseEntity{
     @Embedded
     private Password password;
 
-    private long lastLoginTimestamp;
+    private long lastLoginTimestamp = Clock.systemUTC().millis();
 
-    @Embedded
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus;
+    private UserStatus userStatus = UserStatus.ACTIVE;
+
+    private LocalDate inactiveDate;
 
     @Builder
     public User(String email, String password) {
@@ -55,5 +59,6 @@ public class User extends BaseEntity{
 
     public void inactive(){
         this.userStatus = UserStatus.INACTIVE;
+        this.inactiveDate = LocalDateTime.now().toLocalDate();
     }
 }
