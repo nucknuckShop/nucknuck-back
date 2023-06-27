@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.infrastructrue;
+package com.shop.nucknuckshop.user.infrastructure;
 
 import com.shop.nucknuckshop.user.domain.Email;
 import com.shop.nucknuckshop.user.domain.User;

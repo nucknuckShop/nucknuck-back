@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.infrastructrue;
+package com.shop.nucknuckshop.user.infrastructure;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.nucknuckshop.user.controller.request.UserSearch;
@@ -6,7 +6,6 @@ import com.shop.nucknuckshop.user.domain.Email;
 import com.shop.nucknuckshop.user.domain.User;
 import com.shop.nucknuckshop.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -32,5 +31,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     public void save(User user){
         userJpaRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userJpaRepository.delete(user);
     }
 }

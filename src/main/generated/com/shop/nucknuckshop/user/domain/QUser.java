@@ -22,7 +22,17 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final QBaseEntity _super = new QBaseEntity(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDateTime = _super.createdDateTime;
+
     public final QEmail email;
+
+    public final NumberPath<Long> lastLoginTimestamp = createNumber("lastLoginTimestamp", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedDateTime = _super.modifiedDateTime;
 
     public final QPassword password;
 

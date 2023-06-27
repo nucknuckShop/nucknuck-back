@@ -7,10 +7,7 @@ import com.shop.nucknuckshop.user.controller.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,13 +21,19 @@ public class UserSignController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserResponse> signUp(@RequestBody @Valid UserSignUpRequest request){
-        userSignService.signUp(request.getEmail(), request.getPassword());
+        userSignService.signup(request.getEmail(), request.getPassword());
         return ResponseEntity.ok(request.convertToResponse());
     }
 
     @PostMapping("/signin")
     public ResponseEntity<UserResponse> signIn(@RequestBody @Valid UserSignInRequest request){
-        userSignService.signIn(request.getEmail(), request.getPassword());
+        userSignService.signin(request.getEmail(), request.getPassword());
+        return ResponseEntity.ok(request.convertToResponse());
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<UserResponse> inactive(@RequestBody @Valid UserSignInRequest request){
+        userSignService.inactive(request.getEmail(), request.getPassword());
         return ResponseEntity.ok(request.convertToResponse());
     }
 }

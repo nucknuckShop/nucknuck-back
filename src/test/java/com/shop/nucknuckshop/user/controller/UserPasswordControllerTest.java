@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.nucknuckshop.exception.BadPasswordException;
 import com.shop.nucknuckshop.user.controller.request.UserPasswordChangeRequest;
 import com.shop.nucknuckshop.user.domain.User;
-import com.shop.nucknuckshop.user.infrastructrue.UserJpaRepository;
+import com.shop.nucknuckshop.user.infrastructure.UserJpaRepository;
 import com.shop.nucknuckshop.user.testconfigs.MockMvcRestDocumentationConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
