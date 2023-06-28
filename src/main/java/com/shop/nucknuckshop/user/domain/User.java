@@ -3,6 +3,7 @@ package com.shop.nucknuckshop.user.domain;
 import com.shop.nucknuckshop.exception.BadPasswordException;
 import com.shop.nucknuckshop.util.clock.ClockHolder;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.Clock;
@@ -27,6 +28,7 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.ACTIVE;
 
+    @Nullable
     private LocalDate inactiveDate;
 
     @Builder
@@ -55,10 +57,18 @@ public class User extends BaseEntity{
 
     public void updateLastLoginTimestamp(ClockHolder clockHolder){
         this.lastLoginTimestamp = clockHolder.getMillis();
+        active();
     }
 
     public void inactive(){
         this.userStatus = UserStatus.INACTIVE;
         this.inactiveDate = LocalDateTime.now().toLocalDate();
+    }
+
+    private void active(){
+        if(this.userStatus == UserStatus.INACTIVE){
+            this.userStatus = UserStatus.ACTIVE;
+            this.inactiveDate = null;
+        }
     }
 }

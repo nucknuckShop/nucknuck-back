@@ -1,6 +1,8 @@
 package com.shop.nucknuckshop.batch.user;
 
+import com.shop.nucknuckshop.user.application.UserSignService;
 import com.shop.nucknuckshop.user.domain.User;
+import com.shop.nucknuckshop.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -25,6 +27,7 @@ public class InactivatedUserDeleteBatch {
     private final UserJobListener userJobListener;
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
+    private final UserRepository userRepository;
 
     private static final int CHUNK_SIZE = 10;
 
@@ -52,13 +55,16 @@ public class InactivatedUserDeleteBatch {
                 .name("inactivatedUserDeleteItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(CHUNK_SIZE)
-                .queryString("SELECT u FROM NNS_USER u WHERE user_status = 'INACTIVE'") // AND INACTIVE_DATE < DATE_FORMAT(now(), %Y-%m-%d)
+                .queryString("SELECT u FROM NNS_USER u WHERE user_status = 'INACTIVE' AND 30 < DATEDIFF(DATE_FORMAT(now(), '%Y-%m-%d'), inactive_date)")
                 .build();
     }
 
     private ItemWriter<User> jpaPagingItemWriter() {
         return list -> {
-            log.info("Deleted user = {}", list);
+            for (User user : list){
+                log.info("Delete deactivated user over 30 days : {}", user.getEmail().getValue());
+                userRepository.delete(user);
+            }
         };
     }
 }
