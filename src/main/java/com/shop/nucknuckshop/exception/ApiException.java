@@ -1,7 +1,6 @@
 package com.shop.nucknuckshop.exception;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;

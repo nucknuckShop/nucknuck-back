@@ -1,4 +1,4 @@
-package com.shop.nucknuckshop.user.testconfigs;
+package com.shop.nucknuckshop.user.configs;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

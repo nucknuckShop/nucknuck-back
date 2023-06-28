@@ -5,7 +5,7 @@ import com.shop.nucknuckshop.exception.BadPasswordException;
 import com.shop.nucknuckshop.user.controller.request.UserPasswordChangeRequest;
 import com.shop.nucknuckshop.user.domain.User;
 import com.shop.nucknuckshop.user.infrastructure.UserJpaRepository;
-import com.shop.nucknuckshop.user.testconfigs.MockMvcRestDocumentationConfig;
+import com.shop.nucknuckshop.user.configs.MockMvcRestDocumentationConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import org.springframework.test.context.TestConstructor;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.shop.nucknuckshop.user.testconfigs.ClearFieldDescriptor.parameter;
+import static com.shop.nucknuckshop.user.configs.ClearFieldDescriptor.parameter;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

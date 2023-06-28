@@ -7,6 +7,7 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
@@ -29,15 +30,16 @@ public class InactivatedUserDeleteBatch {
 
     @Bean
     public Job jpaPagingItemReaderJob() {
-        return jobBuilderFactory.get("jpaPagingItemReaderJob")
-                .listener(userJobListener)
+        return jobBuilderFactory.get("inactivatedUserDeleteJob")
                 .start(jpaPagingItemReaderStep())
+                .incrementer(new RunIdIncrementer())
+                .listener(userJobListener)
                 .build();
     }
 
     @Bean
     public Step jpaPagingItemReaderStep() {
-        return stepBuilderFactory.get("jpaPagingItemReaderStep")
+        return stepBuilderFactory.get("inactivatedUserDeleteStep")
                 .<User, User>chunk(CHUNK_SIZE)
                 .reader(jpaPagingItemReader())
                 .writer(jpaPagingItemWriter())
@@ -47,18 +49,16 @@ public class InactivatedUserDeleteBatch {
     @Bean
     public JpaPagingItemReader<User> jpaPagingItemReader() {
         return new JpaPagingItemReaderBuilder<User>()
-                .name("jpaPagingInactivatedUserDeleteItemReader")
+                .name("inactivatedUserDeleteItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(CHUNK_SIZE)
-                .queryString("SELECT email FROM nns_user WHERE user_status = INACTIVE") // AND INACTIVE_DATE < DATE_FORMAT(now(), %Y-%m-%d)
+                .queryString("SELECT u FROM NNS_USER u WHERE user_status = 'INACTIVE'") // AND INACTIVE_DATE < DATE_FORMAT(now(), %Y-%m-%d)
                 .build();
     }
 
     private ItemWriter<User> jpaPagingItemWriter() {
         return list -> {
-            for (User user: list) {
-                log.info("Deleted user = {}", user);
-            }
+            log.info("Deleted user = {}", list);
         };
     }
 }

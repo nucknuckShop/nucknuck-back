@@ -3,7 +3,7 @@ package com.shop.nucknuckshop.user.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.nucknuckshop.exception.BadPasswordException;
 import com.shop.nucknuckshop.exception.NoSuchUserException;
-import com.shop.nucknuckshop.user.testconfigs.MockMvcRestDocumentationConfig;
+import com.shop.nucknuckshop.user.configs.MockMvcRestDocumentationConfig;
 import com.shop.nucknuckshop.user.controller.request.UserSignInRequest;
 import com.shop.nucknuckshop.user.controller.request.UserSignUpRequest;
 import com.shop.nucknuckshop.user.domain.User;
@@ -27,7 +27,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import static com.shop.nucknuckshop.user.testconfigs.ClearFieldDescriptor.parameter;
+import static com.shop.nucknuckshop.user.configs.ClearFieldDescriptor.parameter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
