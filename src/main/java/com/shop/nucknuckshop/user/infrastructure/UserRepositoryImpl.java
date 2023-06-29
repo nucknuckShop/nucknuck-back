@@ -29,6 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findById(email);
     }
 
+    @Override
     public void save(User user){
         userJpaRepository.save(user);
     }
@@ -37,4 +38,11 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(User user) {
         userJpaRepository.delete(user);
     }
+
+    @Override
+    public void deleteAll() {
+        userJpaRepository.deleteAll();
+    }
+
+
 }

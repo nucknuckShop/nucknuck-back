@@ -1,6 +1,5 @@
 package com.shop.nucknuckshop.batch.user;
 
-import com.shop.nucknuckshop.user.application.UserSignService;
 import com.shop.nucknuckshop.user.domain.User;
 import com.shop.nucknuckshop.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
