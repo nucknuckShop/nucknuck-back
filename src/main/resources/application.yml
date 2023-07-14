@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: "optional:configserver:http://52.79.68.113:8081/"
+  cloud:
+    config:
+      name: client
+      profile: dev
+
+encrypt:
+  key: key-brian

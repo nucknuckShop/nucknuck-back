@@ -19,6 +19,11 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2021.0.8")
+    snippetsDir = file('build/generated-snippets')
+}
+
 dependencies {
 
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.6.RELEASE'
@@ -31,6 +36,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation "com.querydsl:querydsl-core"
     implementation "com.querydsl:querydsl-jpa"
@@ -54,12 +60,14 @@ dependencies {
     testImplementation 'org.springframework.batch:spring-batch-test'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
-ext {
-    snippetsDir = file('build/generated-snippets')
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 test {
